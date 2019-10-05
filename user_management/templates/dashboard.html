@@ -1,0 +1,165 @@
+{% load staticfiles %}
+
+<!doctype html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+          crossorigin="anonymous">
+
+    <style>
+        @mixin clearfix() {
+        &::after {
+            display: block;
+            content: "";
+            clear: both;
+        }
+        }
+        .element {
+        @include clearfix;
+        }
+
+        li {
+            list-style: none;
+        }
+    </style>
+
+    <title>Sharif's Site</title>
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark ">
+    <a class="navbar-brand p-4" href="#" style="font-size:30px;">Dashboard
+    </a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+                <a class="nav-link p-3" href="#">Home <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item active">
+                <a class="nav-link p-3" href="#">About us <span class="sr-only">(current)</span></a>
+            </li>
+
+
+            {% if user.is_authenticated %}
+                <li class="nav-item active">
+                    <a class="nav-link p-3" href="#">Secret Page <span class="sr-only">(current)</span></a>
+                </li>
+            {% endif %}
+
+        </ul>
+
+        {% if request.user.is_authenticated %}
+            <ul class="navbar-nav mr">
+
+                <li class="nav-item dropdown">
+                    <button class="btn btn-info nav-link dropdown-toggle" href="#" id="navbarDropdown"
+                            role="button" data-toggle="dropdown"
+                            aria-haspopup="true" aria-expanded="false">{{ user.username }}</button>
+
+                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" href="#">Change_password</a>
+                        <a class="dropdown-item" href="#">Profile</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="#">Log out</a>
+                    </div>
+                </li>
+
+            </ul>
+
+
+        {% else %}
+            <form class="form-inline my-2 my-lg-0">
+                <a href="#" class="btn btn-primary">Log in</a>
+                <a href="#" class="btn btn-primary ml-2">Sign up</a>
+            </form>
+        {% endif %}
+    </div>
+</nav>
+<div class="container-fluid">
+    <div class="row justify-content-center">
+        <div class="col-sm-3 bg-info">
+            <h3 class="m-4">Information</h3>
+            <hr>
+            <div class="list-group" id="list-tab" role="tablist">
+                <a class="list-group-item list-group-item-action active" id="list-home-list" data-toggle="list"
+                   href="#list-home" role="tab" aria-controls="home">Home</a>
+                <a class="list-group-item list-group-item-action" id="list-profile-list" data-toggle="list"
+                   href="#list-profile" role="tab" aria-controls="profile">Profile</a>
+                <a class="list-group-item list-group-item-action" id="list-messages-list" data-toggle="list"
+                   href="#list-messages" role="tab" aria-controls="messages">Messages</a>
+                <a class="list-group-item list-group-item-action" id="list-settings-list" data-toggle="list"
+                   href="#list-settings" role="tab" aria-controls="settings">Settings</a>
+            </div>
+
+        </div>
+        <div class="col-sm-9 mt-4">
+            {% block content %}
+
+            {% endblock %}
+
+        </div>
+    </div>
+</div>
+
+<hr class="embed-responsive-4by3">
+
+<div class="container-fluid ">
+    <div class="row">
+        <div class="col sm-3 ml-4 pt-4">
+            <h4 class="">Developed By</h4>
+        </div>
+        <div class="col sm-3 ml-4 pt-4">
+            <h4>Our Services</h4>
+            <ul>
+                <li>
+                    <a class="nav-link" href="#">Blog <span class="sr-only">(current)</span></a>
+                    <a class="nav-link" href="#">Linked In <span class="sr-only">(current)</span></a>
+                    <a class="nav-link" href="#">Stack Overflow <span class="sr-only">(current)</span></a>
+                    <a class="nav-link" href="#">Github <span class="sr-only">(current)</span></a>
+                    <a class="nav-link" href="#">Gitlab <span class="sr-only">(current)</span></a>
+                </li>
+            </ul>
+
+
+        </div>
+        <div class="col sm-3 ml-4 pt-4">
+            <h4>Know More</h4>
+        </div>
+        <div class="col sm-3 ml-4 pt-4">
+            <h4>About Me</h4>
+            <a class="nav-link" href="#">Facebook <span class="sr-only">(current)</span></a>
+            <a class="nav-link" href="#">Linked In <span class="sr-only">(current)</span></a>
+            <a class="nav-link" href="#">Stack Overflow <span class="sr-only">(current)</span></a>
+            <a class="nav-link" href="#">Github <span class="sr-only">(current)</span></a>
+            <a class="nav-link" href="#">Gitlab <span class="sr-only">(current)</span></a>
+
+        </div>
+    </div>
+</div>
+
+{% comment %}{% endcomment %}
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>
